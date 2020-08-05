@@ -52,6 +52,8 @@ function getEmpHrs()
         echo $empHr
 }
 
+
+
 while [[ $totalEmpHr -le $MAX_WORKING_HRS && $totalWorkingDays -le $NUMBER_OF_WORKING_DAYS ]]
 do
         ((totalWorkingDays++))
@@ -64,7 +66,8 @@ do
 	#Creating Dictionary(daily_emp_wage)
 	daily_emp_wage["Day"$totalWorkingDays]="$( getDailyWage $empHr )"
 	totalEmpHr=$((totalEmpHr+empHr))
-	totalSalary=$( getTotalWage $totalEmpHr )
+	
+	echo "Total work hours is $totalempHr"
 
 
         
