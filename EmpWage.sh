@@ -71,5 +71,4 @@ do
 done
 
 echo "Values of daily_emp_wage Dictionary: "${daily_emp_wage[@]}
-#echo "Total Wage of Emp: "$totalSalary
-echo "Keys of daily_emp_wage Dictionary: "${!daily_emp_wage[@]}
+
