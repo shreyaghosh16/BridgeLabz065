@@ -28,7 +28,10 @@ function getDailyWage()
 function getEmpHrs()
 {
         case $empCheck in
-              
+                $IS_PART_TIME)
+                        #echo "Employee is Part-Time"
+                        empHr=4
+                ;;
                 $IS_FULL_TIME)
                         #echo "Employee is Full-Time"
                         empHr=8
