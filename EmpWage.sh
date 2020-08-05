@@ -64,7 +64,7 @@ do
 
 
 	#Creating Dictionary(daily_emp_wage)
-	daily_emp_wage["Day"$totalWorkingDays]="$( getDailyWage $empHr )"
+	daily_emp_wage[$totalWorkingDays]="$( getDailyWage $empHr )"
 	totalEmpHr=$((totalEmpHr+empHr))
 	
 	echo "Total work hours is $totalempHr"
@@ -73,5 +73,9 @@ do
         
 done
 
+
 echo "Values of daily_emp_wage Dictionary: "${daily_emp_wage[@]}
+echo "Total Wage of Emp: "$totalSalary
+echo "Keys of daily_emp_wage Dictionary: "${!daily_emp_wage[@]}
+
 
