@@ -1,27 +1,75 @@
 #!/bin/bash -x
+Constants
 
-empCheck=$((RANDOM%3))
+IS_PART_TIME=1
+IS_FULL_TIME=2
 EMP_WAGE_PER_HR=20
-full_hr=8
-part_hr=4
+MAX_WORKING_HRS=100
+NUMBER_OF_WORKING_DAYS=20
 
-case $empCheck in
-                2)
-                        echo "Employee is Part-Time"
-                        wage=$(( $EMP_WAGE_PER_HR * $part_hr ))
-						
-						echo "wage per day "$wage
+
+echo "Welcome to Employee Wage Computation Program on Master Branch"
+
+isPresent=$((RANDOM%2))
+if [ $isPresent == 0 ]
+then
+   echo "The Employee is absent"
+else 
+   echo "The Employee is present"
+fi
+
+function getDailyWage()
+{
+        local empHrs=$1
+        empSalary=$((empHrs*EMP_WAGE_PER_HR))
+        echo $empSalary
+}
+
+function getTotalWage()
+{
+        local empHrs=$1
+        empSalary=$((empHrs*EMP_WAGE_PER_HR))
+        echo $empSalary
+}
+
+function getEmpHrs()
+{
+        case $empCheck in
+                $IS_PART_TIME)
+                        #echo "Employee is Part-Time"
+                        empHr=4
                 ;;
-                1)
-                        echo "Employee is Full-Time"
-                        wage=$(( $EMP_WAGE_PER_HR * $full_hr ))
-						echo "wage per day "$wage
+                $IS_FULL_TIME)
+                        #echo "Employee is Full-Time"
+                        empHr=8
                 ;;
-                0)
-                        echo "Employee is Absent"
-                        
+                *)
+                        #echo "Employee is Absent"
+                        empHr=0
                 ;;
-				
         esac
 
+        echo $empHr
+}
+
+while [[ $totalEmpHr -le $MAX_WORKING_HRS && $totalWorkingDays -le $NUMBER_OF_WORKING_DAYS ]]
+do
+        ((totalWorkingDays++))
+        empCheck=$((RANDOM%3))
+
+        empHr=$( getEmpHrs $empCheck )
         
+
+
+	#Creating Dictionary(daily_emp_wage)
+	daily_emp_wage["Day"$totalWorkingDays]="$( getDailyWage $empHr )"
+	totalEmpHr=$((totalEmpHr+empHr))
+	totalSalary=$( getTotalWage $totalEmpHr )
+
+
+        
+done
+
+echo "Values of daily_emp_wage Dictionary: "${daily_emp_wage[@]}
+#echo "Total Wage of Emp: "$totalSalary
+echo "Keys of daily_emp_wage Dictionary: "${!daily_emp_wage[@]}
